@@ -2,7 +2,7 @@
 
 from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
-import getpass,argparse,EncryptDecrypt,random,fileinput
+import getpass,argparse,EncryptDecrypt,random
 from sys import argv
 
 
@@ -18,13 +18,8 @@ try:
   elif(mode=='-d'):
       edobj=EncryptDecrypt.ED()
       key=edobj.getfromuser('key')
-      f_IV=open(source_file)
-      IV=f_IV.read()[0:16]
-      for line in fileinput.input(f_IV,inplace=1):
-          line=line.replace(IV,"",1)
-          break;
-      print IV
-      f_IV.close()
+      with open(source_file,"r") as f_IV:
+          IV=f_IV.read()[0:16]
       edobj.AESDecrypt(key,IV,source_file,dest_file)
 except ValueError:
   if len(argv)>4:
