@@ -1,23 +1,23 @@
 from Crypto.Hash import SHA256
 from Crypto.Cipher import AES
-import getpass
+from pbkdf2 import PBKDF2
+import getpass,sys
 
 class ED(object):
-  def getfromuser(self,choice):
-    if choice=='key':
-        key=getpass.getpass('Enter AES Key (minimum 16 characters): ')
-        if len(key)<16:
-            print 'Key entered too short. Please try again.'
-            self.getfromuser(choice)
-        key=key+str(8-len(key)%8)*(8-len(key)%8)
-        return key
-    if choice=='IV':
-        IV_seed=raw_input('Enter a seed for the IV: ')
-        IV=SHA256.new()
-        IV.update(IV_seed)
-        IV.digest()
-        return str(IV)[0:16]
+  def getfromuser(self,*args):
+    try:
+        choice=args[0]
+        IV=args[1]
+    except IndexError:
+        print 'Error processing IV.'
+        sys.exit()
         
+    if choice=='key':
+        password=getpass.getpass('Enter AES your password: \n>')
+        key=PBKDF2(password,IV).read(32)
+        print key
+        return key
+            
   def AESEncrypt(self,key,IV,source,dest):
     print source,dest
     f=open(source,"r")
