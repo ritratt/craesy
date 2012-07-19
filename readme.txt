@@ -4,9 +4,10 @@ Installation:
 Run install.sh as su
 
 Encryption:
-craesy -e /path/to/file /path/to/encrypted/file
+craesy -e /path/to/file.file /path/to/encrypted/file.file
+
 
 Decryption:
-craesy -d /path/to/file /path/to/encrypted/file
+craesy -d path/to/encrypted/file.file /path/to/decrypted/file.file
 
 
