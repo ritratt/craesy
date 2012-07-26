@@ -23,22 +23,26 @@ try:
           IV=f_IV.read()[0:16]
       key=edobj.getfromuser('key',IV)
       edobj.AESDecrypt(key,IV,source_file,dest_file)
-  elif(mode=='-h'):
-      print """ craesy [option] filepath1 filepath2
-                Options/Modes:
-                -e - Encrypt mode. Should be followed by source file path and the destionation file path.
-                     e.g. craesy -e /home/user/foo.txt /home/user/docs/bar.aes
-
-                -d - Decrypt mode. Should be followed by source file path and the destionation file path.
-                     e.g. craesy -d /home/user/docs/bar.aes /home/user/foo.txt
-
-                -h - Shows this message.
-            """
       
 except ValueError:
-  if len(argv)>4:
-    print 'Too many parameters passed. Please try again with 3 parameters.\n Try craesy -h for more information.'
+  if(len(argv)>4):
+    print 'Too many parameters passed. Please try again with 3 parameters.\nTry craesy -h for more information.'
     sys.exit()
-  elif len(argv)<4:
-    print 'Too few parameters passed. Please try again with 3 parameters.\n Try craesy -h for more information.'
+  elif len(argv)<2 or len(argv)>3:
+    print 'Too few parameters passed. Please try again with 3 parameters.\nTry craesy -h for more information.'
     sys.exit()
+  elif argv[1]=='-h':
+    print """
+craesy [option] filepath1 filepath2
+Options/Modes:
+              -e - Encrypt mode. Should be followed by source file path and the destionation file path.
+                   e.g. craesy -e /home/user/foo.txt /home/user/docs/bar.aes
+
+              -d - Decrypt mode. Should be followed by source file path and the destionation file path.
+                   e.g. craesy -d /home/user/docs/bar.aes /home/user/foo.txt
+
+              -h - Shows this message.
+          """
+  else:
+    print 'Try craesy -h for more information.'
+
