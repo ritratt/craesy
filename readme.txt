@@ -1,7 +1,8 @@
-craesy is a simple command line file encryption tool implemented in python. It implements minimal functionality.
+craesy is a simple command line file encryption tool implemented in python for Linux OS. It implements minimal functionality.
 
 Installation:
-Run install.sh as su
+1. Download as zip and extract.
+2. Run install.sh as su
 
 Encryption:
 craesy -e /path/to/file.file /path/to/encrypted/file.file
