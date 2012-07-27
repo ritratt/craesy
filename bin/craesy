@@ -6,7 +6,7 @@ import getpass,argparse,random,sys
 from sys import argv
 
 sys.path.append("//usr//lib//craesy/scripts")
-import EncryptDecrypt
+import EncryptDecrypt,FileOrFolder
     
 try:
   script,mode,source_file,dest_file=argv
@@ -35,13 +35,13 @@ except ValueError:
     print """
 craesy [option] filepath1 filepath2
 Options/Modes:
-              -e - Encrypt mode. Should be followed by source file path and the destionation file path.
-                   e.g. craesy -e /home/user/foo.txt /home/user/docs/bar.aes
+	-e - Encrypt mode. Should be followed by source file path and the destionation file path.
+     	     e.g. craesy -e /home/user/foo.txt /home/user/docs/bar.aes
 
-              -d - Decrypt mode. Should be followed by source file path and the destionation file path.
-                   e.g. craesy -d /home/user/docs/bar.aes /home/user/foo.txt
+	-d - Decrypt mode. Should be followed by source file path and the destionation file path.
+	     e.g. craesy -d /home/user/docs/bar.aes /home/user/foo.txt
 
-              -h - Shows this message.
+	-h - Shows this message.
           """
   else:
     print 'Try craesy -h for more information.'
