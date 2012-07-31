@@ -5,32 +5,32 @@ from Crypto.Hash import SHA256
 import getpass,argparse,random,sys
 from sys import argv
 
-sys.path.append("//usr//lib//craesy/scripts")
-import EncryptDecrypt,FileOrFolder
+#sys.path.append("//usr//lib//craesy/scripts")
+sys.path.append("//home//ritratt//Documents//Code//craesy//scripts")
+import EncryptDecrypt,GetFiles
     
 try:
-  script,mode,source_file,dest_file=argv
+  script,mode,source_file=argv
   
   if(mode=='-e'):
       edobj=EncryptDecrypt.ED()
       IV=SHA256.new(str(random.randint(0,2**100))).hexdigest()[0:16]
       key=edobj.getfromuser('key',IV)
-      print IV
-      edobj.AESEncrypt(key,IV,source_file,dest_file)      
+      edobj.AESEncrypt(key,IV,source_file)      
   elif(mode=='-d'):
       edobj=EncryptDecrypt.ED()
       with open(source_file,"r") as f_IV:
           IV=f_IV.read()[0:16]
       key=edobj.getfromuser('key',IV)
-      edobj.AESDecrypt(key,IV,source_file,dest_file)
+      edobj.AESDecrypt(key,IV,source_file)
       
 except ValueError:
   if(len(argv)>4):
     print 'Too many parameters passed. Please try again with 3 parameters.\nTry craesy -h for more information.'
     sys.exit()
-  elif len(argv)<2 or len(argv)>3:
-    print 'Too few parameters passed. Please try again with 3 parameters.\nTry craesy -h for more information.'
-    sys.exit()
+#  elif len(argv)<2 or len(argv)>3:
+#    print 'Too few parameters passed. Please try again with 3 parameters.\nTry craesy -h for more information.'
+#    sys.exit()
   elif argv[1]=='-h':
     print """
 craesy [option] filepath1 filepath2
