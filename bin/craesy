@@ -10,19 +10,17 @@ sys.path.append("//home//ritratt//Documents//Code//craesy//scripts")
 import EncryptDecrypt,GetFiles
     
 try:
-  script,mode,source_file=argv
+  script,mode,source_path=argv
   
   if(mode=='-e'):
       edobj=EncryptDecrypt.ED()
-      IV=SHA256.new(str(random.randint(0,2**100))).hexdigest()[0:16]
-      key=edobj.getfromuser('key',IV)
-      edobj.AESEncrypt(key,IV,source_file)      
+      #IV=SHA256.new(str(random.randint(0,2**100))).hexdigest()[0:16]
+      password=edobj.getfromuser('password')  
+      edobj.AESEncrypt(password,source_path)      
   elif(mode=='-d'):
       edobj=EncryptDecrypt.ED()
-      with open(source_file,"r") as f_IV:
-          IV=f_IV.read()[0:16]
-      key=edobj.getfromuser('key',IV)
-      edobj.AESDecrypt(key,IV,source_file)
+      password=edobj.getfromuser('password')  
+      edobj.AESDecrypt(password,source_path)
       
 except ValueError:
   if(len(argv)>4):
