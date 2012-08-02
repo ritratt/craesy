@@ -14,7 +14,6 @@ try:
   
   if(mode=='-e'):
       edobj=EncryptDecrypt.ED()
-      #IV=SHA256.new(str(random.randint(0,2**100))).hexdigest()[0:16]
       password=edobj.getfromuser('password')  
       edobj.AESEncrypt(password,source_path)      
   elif(mode=='-d'):
@@ -31,7 +30,7 @@ except ValueError:
 #    sys.exit()
   elif argv[1]=='-h':
     print """
-craesy [option] filepath1 filepath2
+craesy [option] <path>
 Options/Modes:
 	-e - Encrypt mode. Should be followed by source file path and the destionation file path.
      	     e.g. craesy -e /home/user/foo.txt /home/user/docs/bar.aes

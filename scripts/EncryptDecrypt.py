@@ -6,23 +6,25 @@ import GetFiles
 
 class ED(object):
   	def generatekey(self,password,IV):
-   # try:
-    #    choice=args[0]
-     #   IV=args[1]
-   # except IndexError:
-    #    print 'Error processing IV.'
-     #   sys.exit()
-        
-   # if choice=='key':
-		key=PBKDF2(password,IV).read(32)
+   		key=PBKDF2(password,IV).read(32)
         	return key
+
 	def getfromuser(self,choice):
 		if choice=='password':
 	        	password=getpass.getpass('Enter AES your password: \n>')
 			return password
+		if choice=='yes_no':
+			yes_no=raw_input()
+			return yes_no
+
 	def AESEncrypt(self,password,source):
 		files=GetFiles.getfiles(source)
-		for a_file in files:
+		print 'Would you like to see which files will be encrypted?(y/n)'
+		show_files=self.getfromuser('yes_no')
+		if(show_files == 'yes' or show_files=='y'):
+			print files
+	for a_file in files:
+			print 'Encrypting '+a_file
     			f=open(a_file,"r")
         		fstream=f.read()
         		f.close()
@@ -39,7 +41,12 @@ class ED(object):
         
 	def AESDecrypt(self,password,source):
 		files=GetFiles.getfiles(source)
+		print 'Would you like to see which files will be decrypted?'
+		show_files=self.getfromuser('yes_no')
+		if(show_files == 'yes' or show_files=='y'):
+			print files
     		for a_file in files:
+			print 'Decrypting '+a_file
 			f=open(a_file,"r")
 			fstream=f.read()
 			f.close()
