@@ -10,25 +10,25 @@ sys.path.append("//home//ritratt//Documents//Code//craesy//scripts")
 import EncryptDecrypt,GetFiles
     
 try:
-  script,mode,source_path=argv
+  script, mode, source_path = argv
   
-  if(mode=='-e'):
-      edobj=EncryptDecrypt.ED()
-      password=edobj.getfromuser('password')  
-      edobj.AESEncrypt(password,source_path)      
-  elif(mode=='-d'):
-      edobj=EncryptDecrypt.ED()
-      password=edobj.getfromuser('password')  
-      edobj.AESDecrypt(password,source_path)
+  if(mode == '-e'):
+      edobj = EncryptDecrypt.ED()
+      password = edobj.getfromuser('password')  
+      edobj.AESEncrypt(password, source_path)      
+  elif(mode == '-d'):
+      edobj = EncryptDecrypt.ED()
+      password = edobj.getfromuser('password')  
+      edobj.AESDecrypt(password, source_path)
       
 except ValueError:
-  if(len(argv)>4):
+  if(len(argv) > 4):
     print 'Too many parameters passed. Please try again with 3 parameters.\nTry craesy -h for more information.'
     sys.exit()
 #  elif len(argv)<2 or len(argv)>3:
 #    print 'Too few parameters passed. Please try again with 3 parameters.\nTry craesy -h for more information.'
 #    sys.exit()
-  elif argv[1]=='-h':
+  elif argv[1] == '-h':
     print """
 craesy [option] <path>
 Options/Modes:

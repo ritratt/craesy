@@ -1,11 +1,9 @@
-all:	craesy
+all:	base
 	sudo yum install python
-
-craesy:	pbkdf2
+	sudo apt-get install python
+	sudo yum install pip
+	sudo apt-get install python-pip
+base:	
 	pip install pbkdf2
-pbkdf2:	pip
-	$ curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
-
-pip:	
+	pip install pycrypto
 	sudo sh install.sh
-	
