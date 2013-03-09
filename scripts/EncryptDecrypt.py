@@ -23,7 +23,7 @@ class ED(object):
 		show_files=self.getfromuser('yes_no')
 		if(show_files == 'yes' or show_files == 'y'):
 			print files
-	for a_file in files:
+		for a_file in files:
 			print 'Encrypting ' + a_file
     			f = open(a_file, "r")
         		fstream = f.read()
@@ -33,7 +33,7 @@ class ED(object):
         		source_ext = a_file[-3:]
         		AES_stream = AES.new(key, AES.MODE_CFB, IV)
         		AES_encrypted = AES_stream.encrypt(fstream)
-        		dest = str(a_file)[:-3] + 'csy'
+        		dest = str(a_file)[:-3] + '.csy'
         		with open(dest, "w") as write_file:
 				write_file.write(str(IV) + source_ext + AES_encrypted)
 		print 'Encryption done!'

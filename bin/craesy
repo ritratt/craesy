@@ -5,8 +5,8 @@ from Crypto.Hash import SHA256
 import getpass,argparse,random,sys
 from sys import argv
 
-#sys.path.append("//usr//lib//craesy/scripts")
-sys.path.append("//home//ritratt//Documents//Code//craesy//scripts")
+sys.path.append("//usr//lib//craesy/scripts")
+#sys.path.append("//home//ritratt//Documents//Code//craesy//scripts")
 import EncryptDecrypt,GetFiles
     
 try:

@@ -1,7 +1,9 @@
 import os,itertools,sys
+import sh
 
 def getfiles(userpath):
 	filepath=[]
+	userpath = os.path.abspath(userpath)
 	contents=os.walk(userpath)
 	temp = contents
 	temp_list=list(temp)
@@ -15,12 +17,18 @@ def getfiles(userpath):
 			sys.exit()
 
 	contents=os.walk(userpath)
-	for folder in contents:
-		for fileonly in folder[2]:
-			filepath.append(str(folder[0])+'/'+str(fileonly))
-	if (len(filepath)==0):
-		print 'No files to encrypt in the given folder.'
-		sys.exit()
-	return filepath
-
+	raw_files = contents.next()
+	files = sh.ls(str(raw_files[0]), '-R')
+	files = str(files).split()
+	ff = []
+	for i in xrange(len(files)):
+		if files[i][-1] == ':':
+			folder = files[i][:-1]
+			continue
+		try:
+			sh.cd(folder + '/' + files[i])
+			continue
+		except OSError:
+			ff.append(folder + '/' + files[i])
+	return ff
 
