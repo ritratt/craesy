@@ -2,7 +2,7 @@ from Crypto.Hash import SHA256
 from Crypto.Cipher import AES
 from pbkdf2 import PBKDF2
 import getpass,sys,random
-import GetFiles
+import Utils
 
 class ED(object):
   	def generatekey(self,password,IV):
@@ -18,7 +18,7 @@ class ED(object):
 			return yes_no
 
 	def AESEncrypt(self, password, source):
-		files = GetFiles.getfiles(source)
+		files = Utils.getfiles(source)
 		print 'Would you like to see which files will be encrypted?(y/n)'
 		show_files=self.getfromuser('yes_no')
 		if(show_files == 'yes' or show_files == 'y'):
@@ -30,12 +30,13 @@ class ED(object):
         		f.close()
 			IV = SHA256.new(str(random.randint(0, 2**100))).hexdigest()[0:16]
 			key = self.generatekey(password, IV)
-        		source_ext = a_file[-3:]
+        		source_file_ext = Utils.getfileExt( a_file )
+			source_filename = Utils.getfilename( a_file )
         		AES_stream = AES.new(key, AES.MODE_CFB, IV)
         		AES_encrypted = AES_stream.encrypt(fstream)
-        		dest = str(a_file)[:-3] + '.csy'
+        		dest = source_filename + '.csy'
         		with open(dest, "w") as write_file:
-				write_file.write(str(IV) + source_ext + AES_encrypted)
+				write_file.write(str(IV) + source_file_ext + AES_encrypted)
 		print 'Encryption done!'
         
         
@@ -46,6 +47,8 @@ class ED(object):
 		if(show_files == 'yes' or show_files == 'y'):
 			print files
     		for a_file in files:
+			if not a_file[-3:] == 'csy':
+				continue
 			print 'Decrypting ' + a_file
 			f = open(a_file, "r")
 			fstream = f.read()

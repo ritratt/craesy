@@ -6,8 +6,7 @@ import getpass,argparse,random,sys
 from sys import argv
 
 sys.path.append("//usr//lib//craesy/scripts")
-#sys.path.append("//home//ritratt//Documents//Code//craesy//scripts")
-import EncryptDecrypt,GetFiles
+import EncryptDecrypt, Utils
     
 try:
   script, mode, source_path = argv
